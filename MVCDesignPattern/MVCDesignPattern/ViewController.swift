@@ -23,6 +23,7 @@ class ViewController: UIViewController {
         usernameField.keyboardType = .emailAddress
         usernameField.autocorrectionType = .no
         passwordField.returnKeyType = .done
+        passwordField.isSecureTextEntry = true
         
         usernameField.addTarget(self, action: #selector(validateFields), for: .editingChanged)
         passwordField.addTarget(self, action: #selector(validateFields), for: .editingChanged)
