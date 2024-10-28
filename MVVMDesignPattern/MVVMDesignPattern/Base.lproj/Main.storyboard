@@ -34,6 +34,9 @@
                                 <color key="tintColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="login" destination="BYZ-38-t0r" eventType="touchUpInside" id="j1L-8L-FZD"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -63,6 +66,46 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="973.28244274809151" y="-2.1126760563380285"/>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="dEh-ek-gyj">
+            <objects>
+                <viewController storyboardIdentifier="HomeVC" id="vEa-Vi-GUX" customClass="HomeViewController" customModule="MVVMDesignPattern" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qbm-Ak-nox">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLw-Vz-78K">
+                                <rect key="frame" x="40" y="415.66666666666669" width="313" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hv1-Ef-qan">
+                                <rect key="frame" x="40" y="355.66666666666669" width="313" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="QMu-Ta-HmR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ZLw-Vz-78K" firstAttribute="centerY" secondItem="qbm-Ak-nox" secondAttribute="centerY" id="5rl-zP-6vv"/>
+                            <constraint firstItem="QMu-Ta-HmR" firstAttribute="trailing" secondItem="Hv1-Ef-qan" secondAttribute="trailing" constant="40" id="Mno-jH-pwX"/>
+                            <constraint firstItem="QMu-Ta-HmR" firstAttribute="trailing" secondItem="ZLw-Vz-78K" secondAttribute="trailing" constant="40" id="SLR-8V-boU"/>
+                            <constraint firstItem="Hv1-Ef-qan" firstAttribute="leading" secondItem="QMu-Ta-HmR" secondAttribute="leading" constant="40" id="bOl-tl-d33"/>
+                            <constraint firstItem="ZLw-Vz-78K" firstAttribute="top" secondItem="Hv1-Ef-qan" secondAttribute="bottom" constant="24" id="eAH-1S-zhH"/>
+                            <constraint firstItem="ZLw-Vz-78K" firstAttribute="leading" secondItem="QMu-Ta-HmR" secondAttribute="leading" constant="40" id="tqx-b6-MPU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="welcomeLabel" destination="ZLw-Vz-78K" id="LhI-8P-6w2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VXc-eb-eHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1723" y="-88"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="W3z-E0-niD">

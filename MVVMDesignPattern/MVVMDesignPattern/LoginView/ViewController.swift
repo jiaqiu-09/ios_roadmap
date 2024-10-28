@@ -35,16 +35,30 @@ class ViewController: UIViewController {
         viewModel.isLoginButtonEnabled.addObserver { [weak self] isEnabled in
             self?.loginButton.isEnabled = isEnabled
         }
+        viewModel.error.addObserver { [weak self] error in
+            if (error != nil) {
+                print("error: \(error!)")
+            } else {
+                if self?.loginButton.isEnabled == true {
+                    if let homepageVC = self?.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? HomeViewController {
+                        self?.navigationController?.pushViewController(homepageVC, animated: true)
+                    }
+                }
+                
+            }
+        }
     }
     
     @objc private func usernameChanged() {
-        // 当用户名输入框值变化时，更新 ViewModel
         viewModel.username.value = userNameTextField.text ?? ""
     }
     
     @objc private func passwordChanged() {
-        // 当用户名输入框值变化时，更新 ViewModel
         viewModel.password.value = passwordTextField.text ?? ""
+    }
+    
+    @IBAction func login() {
+        viewModel.login(username: self.userNameTextField.text!, password: self.passwordTextField.text!)
     }
 }
 

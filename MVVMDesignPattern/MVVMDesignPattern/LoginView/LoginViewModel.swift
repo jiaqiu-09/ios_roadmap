@@ -11,6 +11,7 @@ class LoginViewModel {
     var username = ObservableObject<String>("")
     var password = ObservableObject<String>("")
     var isLoginButtonEnabled = ObservableObject<Bool>(false)
+    var error = ObservableObject<String?>(nil)
     
     init() {
         username.addObserver { [weak self] _ in
@@ -24,6 +25,17 @@ class LoginViewModel {
     
     private func updateLoginButtonState() {
         isLoginButtonEnabled.value = !username.value.isEmpty && !password.value.isEmpty
+    }
+    
+    
+    func login(username: String, password: String) {
+        NetworkService.shared.login(username: username, password: password) { [weak self] success in
+            if (success) {
+                self?.error.value = nil
+            } else {
+                self?.error.value = "Invalid credentials!"
+            }
+        }
     }
     
 }
