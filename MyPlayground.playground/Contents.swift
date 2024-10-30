@@ -53,10 +53,29 @@ func sum2(_ a: Int,_ b: Int) -> Int {
 }
 print(sum2(22, 30))
 
-class Employee {
+class Person {
     var name = ""
+    
+    init() {}
+    
+    init(_ name: String) {
+        self.name = name
+    }
+}
+
+class Employee: Person {
     var salary = 0
     var role = ""
+    
+    override init() {
+        super.init()
+        self.role = "Analyst"
+    }
+    
+    override init(_ name: String) {
+        super.init(name)
+        self.role = "Analyst"
+    }
     
     func doWork() {
         print("Hi my name is \(name) and I'm doing work")
@@ -69,6 +88,7 @@ class Manager: Employee {
     var teamSize = 0
     
     override func doWork() {
+        super.doWork()
         print("I'm managing people")
         salary += 2
     }
@@ -80,3 +100,9 @@ m.name = "Jason"
 m.teamSize = 10
 m.doWork()
 print(m.teamSize)
+
+let p = Person("Tom")
+print(p.name)
+let e = Employee("Joe")
+print(e.name)
+print(e.role)
