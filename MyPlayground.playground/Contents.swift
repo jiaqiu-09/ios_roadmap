@@ -106,3 +106,17 @@ print(p.name)
 let e = Employee("Joe")
 print(e.name)
 print(e.role)
+
+
+class SecretPresent {
+    
+    func surprise() -> Int {
+        return Int.random(in: 1...20)
+    }
+}
+
+
+let present: SecretPresent? = SecretPresent()
+if present != nil {
+    print(present!.surprise())
+}
