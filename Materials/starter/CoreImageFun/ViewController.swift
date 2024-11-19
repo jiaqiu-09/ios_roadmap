@@ -32,41 +32,90 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var slider: UISlider!
   let context = CIContext(options: nil)
+  let filter = CIFilter(name: "CISepiaTone")!
+  var orientation = UIImage.Orientation.up
 
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    applySepiaFilter(intensity: 0.5)
-  }
-
-  @IBAction func sliderValueChanged(_ slider: UISlider) {}
-  @IBAction func loadPhoto() {}
-  
-  func applySepiaFilter(intensity: Float) {
-    // 1
     guard let uiImage = UIImage(named: "image") else { return }
     let ciImage = CIImage(image: uiImage)
-    
-    // 2
-    guard let filter = CIFilter(name: "CISepiaTone") else { return }
-    
-    // 3
     filter.setValue(ciImage, forKey: kCIInputImageKey)
+    applyOldPhotoFilter(intensity: 0.5)
+  }
+
+  @IBAction func sliderValueChanged(_ slider: UISlider) {
+//    applySepiaFilter(intensity: slider.value)
+    applyOldPhotoFilter(intensity: slider.value)
+  }
+  @IBAction func loadPhoto() {
+    let picker = UIImagePickerController()
+    picker.delegate = self
+    present(picker, animated: true)
+  }
+  
+  func applySepiaFilter(intensity: Float) {
+    
     filter.setValue(intensity, forKey: kCIInputIntensityKey)
     
-    // 4
     guard let outputImage = filter.outputImage else { return }
     
-    // 5
-//    let newImage = UIImage(ciImage: outputImage)
-//    imageView.image = newImage
-    
-    // 5
     guard let cgImage = context.createCGImage(outputImage, from: outputImage.extent) else { return }
-    imageView.image = UIImage(cgImage: cgImage)
+    imageView.image = UIImage(cgImage: cgImage, scale: 1, orientation: orientation)
+  }
+  
+  func applyOldPhotoFilter(intensity: Float) {
+    // 1
+    filter.setValue(intensity, forKey: kCIInputIntensityKey)
+
+    // 2
+    let random = CIFilter(name: "CIRandomGenerator")
+
+    // 3
+    let lighten = CIFilter(name: "CIColorControls")
+    lighten?.setValue(random?.outputImage, forKey: kCIInputImageKey)
+    lighten?.setValue(1 - intensity, forKey: kCIInputBrightnessKey)
+    lighten?.setValue(0, forKey: kCIInputSaturationKey)
+
+    // 4
+    guard let ciImage = filter.value(forKey: kCIInputImageKey) as? CIImage else { return }
+    let croppedImage = lighten?.outputImage?.cropped(to: ciImage.extent)
+
+    // 5
+    let composite = CIFilter(name: "CIHardLightBlendMode")
+    composite?.setValue(filter.outputImage, forKey: kCIInputImageKey)
+    composite?.setValue(croppedImage, forKey: kCIInputBackgroundImageKey)
+
+    // 6
+    let vignette = CIFilter(name: "CIVignette")
+    vignette?.setValue(composite?.outputImage, forKey: kCIInputImageKey)
+    vignette?.setValue(intensity * 2, forKey: kCIInputIntensityKey)
+    vignette?.setValue(intensity * 30, forKey: kCIInputRadiusKey)
+
+    // 7
+    guard let outputImage = vignette?.outputImage else { return }
+    guard let cgImage = context.createCGImage(outputImage, from: outputImage.extent) else { return }
+    imageView.image = UIImage(cgImage: cgImage, scale: 1, orientation: orientation)
+  }
+
+  
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    // 1
+    guard let selectedImage = info[.originalImage] as? UIImage else { return }
+    orientation = selectedImage.imageOrientation
+    
+    // 2
+    let ciImage = CIImage(image: selectedImage)
+    filter.setValue(ciImage, forKey: kCIInputImageKey)
+    
+    // 3
+    applySepiaFilter(intensity: slider.value)
+    
+    // 4
+    dismiss(animated: true)
   }
 }
