@@ -31,6 +31,8 @@
 /// THE SOFTWARE.
 
 import UIKit
+import Photos
+import PhotosUI
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
   @IBOutlet weak var imageView: UIImageView!
@@ -53,9 +55,52 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     applyOldPhotoFilter(intensity: slider.value)
   }
   @IBAction func loadPhoto() {
-    let picker = UIImagePickerController()
-    picker.delegate = self
-    present(picker, animated: true)
+    requestPhotoLibraryAccess {
+      self.openImagePicker()
+    }
+  }
+  
+  func requestPhotoLibraryAccess(completion: @escaping () -> Void) {
+      let status = PHPhotoLibrary.authorizationStatus()
+      switch status {
+      case .notDetermined:
+          PHPhotoLibrary.requestAuthorization { newStatus in
+              DispatchQueue.main.async {
+                  if newStatus == .authorized || newStatus == .limited {
+                      completion()
+                  } else {
+                      self.showAccessDeniedAlert()
+                  }
+              }
+          }
+      case .authorized, .limited:
+          // Access already granted
+          completion()
+      default:
+          // Access denied or restricted
+          showAccessDeniedAlert()
+      }
+  }
+  
+  func showAccessDeniedAlert() {
+      let alert = UIAlertController(
+          title: "Photo Library Access Denied",
+          message: "Please enable access in Settings to use this feature.",
+          preferredStyle: .alert
+      )
+      alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+      alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { _ in
+          if let url = URL(string: UIApplication.openSettingsURLString) {
+              UIApplication.shared.open(url)
+          }
+      })
+      present(alert, animated: true)
+  }
+  
+  func openImagePicker() {
+      let picker = UIImagePickerController()
+      picker.delegate = self
+      present(picker, animated: true)
   }
   
   func applySepiaFilter(intensity: Float) {
