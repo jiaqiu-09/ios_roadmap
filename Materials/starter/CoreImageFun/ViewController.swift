@@ -35,6 +35,7 @@ import UIKit
 class ViewController: UIViewController {
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var slider: UISlider!
+  let context = CIContext(options: nil)
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -61,7 +62,11 @@ class ViewController: UIViewController {
     guard let outputImage = filter.outputImage else { return }
     
     // 5
-    let newImage = UIImage(ciImage: outputImage)
-    imageView.image = newImage
+//    let newImage = UIImage(ciImage: outputImage)
+//    imageView.image = newImage
+    
+    // 5
+    guard let cgImage = context.createCGImage(outputImage, from: outputImage.extent) else { return }
+    imageView.image = UIImage(cgImage: cgImage)
   }
 }
