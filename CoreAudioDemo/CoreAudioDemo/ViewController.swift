@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     var audioPlayer: AVAudioPlayer?
     var volumeSlider: UISlider!
     var volumeView: MPVolumeView!
+    var recordButton: UIButton!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +64,13 @@ class ViewController: UIViewController {
         volumeView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(volumeView)
         
+        recordButton = UIButton(type: .system)
+        recordButton.setTitle("Record Page", for: .normal)
+        recordButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        recordButton.addTarget(self, action: #selector(gotoRecordPage), for: .touchUpInside)
+        recordButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(recordButton)
+        
 
         
         NSLayoutConstraint.activate([
@@ -78,7 +87,11 @@ class ViewController: UIViewController {
             volumeView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             volumeView.topAnchor.constraint(equalTo: stopButton.bottomAnchor, constant: 90),
             volumeView.widthAnchor.constraint(equalToConstant: 250),
-            volumeView.heightAnchor.constraint(equalToConstant: 40)
+            volumeView.heightAnchor.constraint(equalToConstant: 40),
+            
+            recordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            recordButton.topAnchor.constraint(equalTo: volumeView.bottomAnchor, constant: 90),
+
         ])
     }
     
@@ -92,6 +105,16 @@ class ViewController: UIViewController {
     
     @objc func volumeChanged() {
         audioPlayer?.volume = volumeSlider.value
+    }
+    
+    @objc func gotoRecordPage() {
+        DispatchQueue.main.async {
+            let recordVC = RecordViewController()
+            recordVC.title = "Record Page"
+            
+            self.navigationController?.pushViewController(recordVC, animated: true)
+        }
+        
     }
 
 }
