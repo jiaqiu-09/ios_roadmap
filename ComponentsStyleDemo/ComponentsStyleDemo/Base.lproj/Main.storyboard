@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="ComponentsStyleDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to App " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kxj-Pm-Z4v" customClass="AppLabel" customModule="ComponentsStyleDemo" customModuleProvider="target">
+                                <rect key="frame" x="48" y="125" width="297" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7fh-tZ-ijL" customClass="AppTextField" customModule="ComponentsStyleDemo" customModuleProvider="target">
+                                <rect key="frame" x="48" y="170" width="297" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MFt-bq-gB1" customClass="AppTextField" customModule="ComponentsStyleDemo" customModuleProvider="target">
+                                <rect key="frame" x="48" y="228" width="297" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cK1-uu-7Ma" customClass="AppButton" customModule="ComponentsStyleDemo" customModuleProvider="target">
+                                <rect key="frame" x="48" y="596" width="297" height="14"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iui-go-KKD" customClass="AppButton" customModule="ComponentsStyleDemo" customModuleProvider="target">
+                                <rect key="frame" x="48" y="634" width="297" height="14"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <action selector="buttonResetPasswordAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nGA-kr-HrG"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cK1-uu-7Ma" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="48" id="BEG-CR-6Wg"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MFt-bq-gB1" secondAttribute="trailing" constant="48" id="MkJ-ap-P8w"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Kxj-Pm-Z4v" secondAttribute="trailing" constant="48" id="N5p-pX-gc2"/>
+                            <constraint firstItem="7fh-tZ-ijL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="48" id="OPI-Jx-xQ4"/>
+                            <constraint firstItem="MFt-bq-gB1" firstAttribute="top" secondItem="7fh-tZ-ijL" secondAttribute="bottom" constant="24" id="b1s-wX-WN3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="iui-go-KKD" secondAttribute="trailing" constant="48" id="bHF-N5-0ME"/>
+                            <constraint firstItem="iui-go-KKD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="48" id="cVa-km-nev"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7fh-tZ-ijL" secondAttribute="trailing" constant="48" id="egB-8G-GBF"/>
+                            <constraint firstItem="7fh-tZ-ijL" firstAttribute="top" secondItem="Kxj-Pm-Z4v" secondAttribute="bottom" constant="24" id="fo7-QN-1c8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cK1-uu-7Ma" secondAttribute="trailing" constant="48" id="grD-Fa-zhb"/>
+                            <constraint firstItem="MFt-bq-gB1" firstAttribute="top" secondItem="7fh-tZ-ijL" secondAttribute="bottom" constant="24" id="hmm-nO-bp7"/>
+                            <constraint firstItem="MFt-bq-gB1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="48" id="kfd-u9-xwA"/>
+                            <constraint firstItem="cK1-uu-7Ma" firstAttribute="top" secondItem="MFt-bq-gB1" secondAttribute="bottom" constant="334" id="rj8-dP-SX6"/>
+                            <constraint firstItem="Kxj-Pm-Z4v" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="66" id="rw7-m1-Tnj"/>
+                            <constraint firstItem="Kxj-Pm-Z4v" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="48" id="snL-tL-YNd"/>
+                            <constraint firstItem="iui-go-KKD" firstAttribute="top" secondItem="cK1-uu-7Ma" secondAttribute="bottom" constant="24" id="uCX-dF-QQ2"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buttonLogin" destination="cK1-uu-7Ma" id="TaW-VL-qGw"/>
+                        <outlet property="buttonReset" destination="iui-go-KKD" id="wg3-r7-prH"/>
+                        <outlet property="labelTitle" destination="Kxj-Pm-Z4v" id="aUE-MF-nDr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="121" y="-34"/>
+        </scene>
+        <!--Reset View Controller-->
+        <scene sceneID="K00-Vm-EtW">
+            <objects>
+                <viewController storyboardIdentifier="ResetViewController" id="LNe-1A-ejR" customClass="ResetViewController" customModule="ComponentsStyleDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WmH-k9-lya">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oph-9U-z2i" customClass="AppLabel" customModule="ComponentsStyleDemo" customModuleProvider="target">
+                                <rect key="frame" x="48" y="130" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N9s-VV-Bb1" customClass="AppTextField" customModule="ComponentsStyleDemo" customModuleProvider="target">
+                                <rect key="frame" x="48" y="175" width="297" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FaR-H5-myF" customClass="AppTextField" customModule="ComponentsStyleDemo" customModuleProvider="target">
+                                <rect key="frame" x="48" y="233" width="297" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EIQ-uh-QYd" customClass="AppTextField" customModule="ComponentsStyleDemo" customModuleProvider="target">
+                                <rect key="frame" x="48" y="291" width="297" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z36-kr-k91" customClass="AppButton" customModule="ComponentsStyleDemo" customModuleProvider="target">
+                                <rect key="frame" x="48" y="373" width="297" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="resetPasswordAction:" destination="LNe-1A-ejR" eventType="touchUpInside" id="JJo-A7-iDS"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="wQc-yk-Oft"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Oph-9U-z2i" firstAttribute="top" secondItem="wQc-yk-Oft" secondAttribute="top" constant="71" id="0Gf-Bk-huE"/>
+                            <constraint firstItem="wQc-yk-Oft" firstAttribute="trailing" secondItem="Z36-kr-k91" secondAttribute="trailing" constant="48" id="1Ry-Yv-0Ht"/>
+                            <constraint firstItem="wQc-yk-Oft" firstAttribute="trailing" secondItem="EIQ-uh-QYd" secondAttribute="trailing" constant="48" id="1mo-d0-3Yb"/>
+                            <constraint firstItem="Z36-kr-k91" firstAttribute="leading" secondItem="wQc-yk-Oft" secondAttribute="leading" constant="48" id="FoV-pB-Enb"/>
+                            <constraint firstItem="FaR-H5-myF" firstAttribute="top" secondItem="N9s-VV-Bb1" secondAttribute="bottom" constant="24" id="J6z-LD-Pql"/>
+                            <constraint firstItem="N9s-VV-Bb1" firstAttribute="top" secondItem="Oph-9U-z2i" secondAttribute="bottom" constant="24" id="PIt-Pv-Zn8"/>
+                            <constraint firstItem="FaR-H5-myF" firstAttribute="leading" secondItem="wQc-yk-Oft" secondAttribute="leading" constant="48" id="ZbB-d5-Ph5"/>
+                            <constraint firstItem="Oph-9U-z2i" firstAttribute="leading" secondItem="wQc-yk-Oft" secondAttribute="leading" constant="48" id="caC-OZ-KVl"/>
+                            <constraint firstItem="EIQ-uh-QYd" firstAttribute="leading" secondItem="wQc-yk-Oft" secondAttribute="leading" constant="48" id="fc1-GK-iRs"/>
+                            <constraint firstItem="EIQ-uh-QYd" firstAttribute="top" secondItem="FaR-H5-myF" secondAttribute="bottom" constant="24" id="kL2-kx-RJJ"/>
+                            <constraint firstItem="N9s-VV-Bb1" firstAttribute="leading" secondItem="wQc-yk-Oft" secondAttribute="leading" constant="48" id="mWa-Xn-qi4"/>
+                            <constraint firstItem="wQc-yk-Oft" firstAttribute="trailing" secondItem="N9s-VV-Bb1" secondAttribute="trailing" constant="48" id="rey-qG-CiI"/>
+                            <constraint firstItem="Z36-kr-k91" firstAttribute="top" secondItem="EIQ-uh-QYd" secondAttribute="bottom" constant="48" id="sor-3J-axf"/>
+                            <constraint firstItem="wQc-yk-Oft" firstAttribute="trailing" secondItem="FaR-H5-myF" secondAttribute="trailing" constant="48" id="xMu-iX-pCO"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emali" destination="N9s-VV-Bb1" id="Yz2-gU-BFs"/>
+                        <outlet property="label" destination="Oph-9U-z2i" id="ihL-a7-k80"/>
+                        <outlet property="password" destination="FaR-H5-myF" id="p8o-VC-qQC"/>
+                        <outlet property="passwordConfirmation" destination="EIQ-uh-QYd" id="pfS-eU-yDf"/>
+                        <outlet property="resetButton" destination="Z36-kr-k91" id="Qhh-qH-U9g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="arL-hy-xAA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="970" y="-399"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
