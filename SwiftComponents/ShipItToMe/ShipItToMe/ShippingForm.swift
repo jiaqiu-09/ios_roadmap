@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FloatingTextInputField
 
 struct ShippingAddress {
   var firstName: String

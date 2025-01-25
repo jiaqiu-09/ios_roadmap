@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import FloatingTextInputField
 
 class EmailValidationViewModel: ObservableObject {
   @Published var email = ""

@@ -3,22 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		8831017A261F098D001655D2 /* ShippingForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889A037F2618A7450058A56B /* ShippingForm.swift */; };
-		88358322263D69BE007917FF /* TextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88358321263D69BE007917FF /* TextInputField.swift */; };
 		884E832C26E3B8C2005B49DF /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884E832B26E3B8C2005B49DF /* MenuView.swift */; };
 		884E832E26E3B8E4005B49DF /* EmailValidationForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884E832D26E3B8E4005B49DF /* EmailValidationForm.swift */; };
 		889A037E2618A7450058A56B /* ShipItToMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889A037D2618A7450058A56B /* ShipItToMeApp.swift */; };
 		889A03822618A7460058A56B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 889A03812618A7460058A56B /* Assets.xcassets */; };
 		889A03852618A7460058A56B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 889A03842618A7460058A56B /* Preview Assets.xcassets */; };
 		88BFB92C26E6267600E4394C /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BFB92B26E6267600E4394C /* String+Extensions.swift */; };
+		AC61DFDF2D43758000691E59 /* FloatingTextInputField in Frameworks */ = {isa = PBXBuildFile; productRef = AC61DFDE2D43758000691E59 /* FloatingTextInputField */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		88358321263D69BE007917FF /* TextInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputField.swift; sourceTree = "<group>"; };
 		884E832B26E3B8C2005B49DF /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		884E832D26E3B8E4005B49DF /* EmailValidationForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationForm.swift; sourceTree = "<group>"; };
 		889A037A2618A7450058A56B /* ShipItToMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShipItToMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -28,6 +27,7 @@
 		889A03842618A7460058A56B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		889A03862618A7460058A56B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88BFB92B26E6267600E4394C /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		AC61DFDC2D43753B00691E59 /* FloatingTextInputField */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FloatingTextInputField; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC61DFDF2D43758000691E59 /* FloatingTextInputField in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,7 +45,9 @@
 		889A03712618A7450058A56B = {
 			isa = PBXGroup;
 			children = (
+				AC61DFDC2D43753B00691E59 /* FloatingTextInputField */,
 				889A037C2618A7450058A56B /* ShipItToMe */,
+				AC61DFDD2D43758000691E59 /* Frameworks */,
 				889A037B2618A7450058A56B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,7 +68,6 @@
 				884E832B26E3B8C2005B49DF /* MenuView.swift */,
 				884E832D26E3B8E4005B49DF /* EmailValidationForm.swift */,
 				889A037F2618A7450058A56B /* ShippingForm.swift */,
-				88358321263D69BE007917FF /* TextInputField.swift */,
 				889A03812618A7460058A56B /* Assets.xcassets */,
 				889A03862618A7460058A56B /* Info.plist */,
 				889A03832618A7460058A56B /* Preview Content */,
@@ -87,6 +89,13 @@
 				88BFB92B26E6267600E4394C /* String+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AC61DFDD2D43758000691E59 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,7 +170,6 @@
 				884E832E26E3B8E4005B49DF /* EmailValidationForm.swift in Sources */,
 				889A037E2618A7450058A56B /* ShipItToMeApp.swift in Sources */,
 				884E832C26E3B8C2005B49DF /* MenuView.swift in Sources */,
-				88358322263D69BE007917FF /* TextInputField.swift in Sources */,
 				88BFB92C26E6267600E4394C /* String+Extensions.swift in Sources */,
 				8831017A261F098D001655D2 /* ShippingForm.swift in Sources */,
 			);
@@ -352,6 +360,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AC61DFDE2D43758000691E59 /* FloatingTextInputField */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FloatingTextInputField;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 889A03722618A7450058A56B /* Project object */;
 }

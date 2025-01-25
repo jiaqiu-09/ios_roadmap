@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct TextInputField: View {
+public struct TextInputField: View {
   private var title: String
   @Binding private var text: String
   @Environment(\.clearButtonHidden) var clearButtonHidden
@@ -23,7 +23,7 @@ struct TextInputField: View {
   }
   @State var validationMessage: String = ""
   
-  init(_ title: String, text: Binding<String>, isValid isValidBinding: Binding<Bool>? = nil) {
+    public init(_ title: String, text: Binding<String>, isValid isValidBinding: Binding<Bool>? = nil) {
     self.title = title
     self._text = text
     self._isValidBinding = isValidBinding ?? .constant(true)
@@ -71,7 +71,7 @@ struct TextInputField: View {
     }
   }
 
-  var body: some View {
+    public var body: some View {
     ZStack(alignment: .leading) {
       if !isValid {
         Text(validationMessage)
@@ -103,13 +103,13 @@ struct TextInputField: View {
 // MARK: - Clear Button
 
 extension View {
-  func clearButtonHidden(_ hidesClearButton: Bool = true) -> some View {
+    public func clearButtonHidden(_ hidesClearButton: Bool = true) -> some View {
     environment(\.clearButtonHidden, hidesClearButton)
   }
 }
 
-private struct TextInputFieldClearButtonHidden: EnvironmentKey {
-  static var defaultValue: Bool = false
+private struct TextInputFieldClearButtonHidden: @preconcurrency EnvironmentKey {
+    @MainActor static var defaultValue: Bool = false
 }
 
 extension EnvironmentValues {
@@ -122,13 +122,13 @@ extension EnvironmentValues {
 // MARK: - Mandatory Field
 
 extension View {
-  func isMandatory(_ value: Bool = true) -> some View {
+    public func isMandatory(_ value: Bool = true) -> some View {
     environment(\.isMandatory, value)
   }
 }
 
-private struct TextInputFieldMandatory: EnvironmentKey {
-  static var defaultValue: Bool = false
+private struct TextInputFieldMandatory: @preconcurrency EnvironmentKey {
+    @MainActor static var defaultValue: Bool = false
 }
 
 extension EnvironmentValues {
@@ -140,8 +140,11 @@ extension EnvironmentValues {
 
 // MARK: - Validation Handler
 
-struct ValidationError: Error {
+public struct ValidationError: Error {
   let message: String
+    public init(message: String) {
+        self.message = message
+    }
 }
 
 extension ValidationError: LocalizedError {
@@ -150,8 +153,8 @@ extension ValidationError: LocalizedError {
   }
 }
 
-private struct TextInputFieldValidationHandler: EnvironmentKey {
-  static var defaultValue: ((String) -> Result<Bool, ValidationError>)?
+private struct TextInputFieldValidationHandler: @preconcurrency EnvironmentKey {
+    @MainActor static var defaultValue: ((String) -> Result<Bool, ValidationError>)?
 }
 
 extension EnvironmentValues {
@@ -162,7 +165,7 @@ extension EnvironmentValues {
 }
 
 extension View {
-  func onValidate(validationHandler: @escaping (String) -> Result<Bool, ValidationError>) -> some View {
+  public func onValidate(validationHandler: @escaping (String) -> Result<Bool, ValidationError>) -> some View {
     environment(\.validationHandler, validationHandler)
   }
 }
