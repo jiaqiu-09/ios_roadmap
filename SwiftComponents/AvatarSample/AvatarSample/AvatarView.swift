@@ -8,6 +8,23 @@
 import SwiftUI
 
 
+struct AvatarEditProfileHandler: EnvironmentKey {
+    static var defaultValue: (() -> Void)?
+}
+
+extension EnvironmentValues {
+    var editProfileHandler: (() -> Void)? {
+        get {self[AvatarEditProfileHandler.self] }
+        set {self[AvatarEditProfileHandler.self] = newValue}
+    }
+}
+
+extension View {
+    public func onEditProfile(editProfileHandler: @escaping () -> Void) -> some View {
+        environment(\.editProfileHandler, editProfileHandler)
+    }
+}
+
 enum AvatarImageShape {
     case round
     case rectangle
@@ -32,6 +49,7 @@ extension View {
 
 struct AvatarView: View {
     @Environment(\.avatarImageShape) var imageShape
+    @Environment(\.editProfileHandler) var editProfileHandler
     var person: Person
     
     @ViewBuilder
@@ -63,6 +81,11 @@ struct AvatarView: View {
     var body: some View {
         HStack(alignment: .top) {
             profileImage
+                .onTapGesture {
+                    if let editProfileHandler {
+                        editProfileHandler()
+                    }
+                }
             VStack(alignment: .leading) {
                 titleLabel
                 detailLabel(person.jobtitle)
@@ -78,6 +101,9 @@ struct AvatarView: View {
 #Preview {
     AvatarView(person: Person.sample)
         .avatarImageShape(AvatarImageShape.rectangle)
+        .onEditProfile {
+            print("You've tapped on the profile image!")
+        }
         .padding()
     AvatarView(person: Person.sample)
         .padding()
