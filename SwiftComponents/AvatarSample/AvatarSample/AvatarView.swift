@@ -8,13 +8,35 @@
 import SwiftUI
 
 
+enum AvatarImageShape {
+    case round
+    case rectangle
+}
+
+struct AvatarImageShapeKey: EnvironmentKey {
+    static var defaultValue: AvatarImageShape = .round
+}
+
+extension EnvironmentValues {
+    var avatarImageShape: AvatarImageShape {
+        get {self[AvatarImageShapeKey.self] }
+        set {self[AvatarImageShapeKey.self] = newValue}
+    }
+}
+
+extension View {
+    func avatarImageShape(_ imageShape: AvatarImageShape) -> some View {
+        environment(\.avatarImageShape, imageShape)
+    }
+}
+
 struct AvatarView: View {
-    var isRound = true
+    @Environment(\.avatarImageShape) var imageShape
     var person: Person
     
     @ViewBuilder
     private var profileImage: some View {
-        if (isRound) {
+        if (imageShape == .round) {
             Image(person.profileImageName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
@@ -54,7 +76,8 @@ struct AvatarView: View {
 }
 
 #Preview {
-    AvatarView(isRound: false, person: Person.sample)
+    AvatarView(person: Person.sample)
+        .avatarImageShape(AvatarImageShape.rectangle)
         .padding()
     AvatarView(person: Person.sample)
         .padding()
