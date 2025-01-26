@@ -9,7 +9,26 @@ import SwiftUI
 
 
 struct AvatarView: View {
+    var isRound = true
     var person: Person
+    
+    @ViewBuilder
+    private var profileImage: some View {
+        if (isRound) {
+            Image(person.profileImageName)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 75, height: 75, alignment: .center)
+                .clipShape(.circle)
+                .accessibilityLabel(person.fullName)
+        } else {
+            Image(person.profileImageName)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 75, height: 75, alignment: .center)
+                .accessibilityLabel(person.fullName)
+        }
+    }
     private var titleLabel: some View {
         Text(person.fullName)
             .font(.headline)
@@ -21,12 +40,7 @@ struct AvatarView: View {
     
     var body: some View {
         HStack(alignment: .top) {
-            Image(person.profileImageName)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 75, height: 75, alignment: .center)
-                .clipShape(.circle)
-                .accessibilityLabel(person.fullName)
+            profileImage
             VStack(alignment: .leading) {
                 titleLabel
                 detailLabel(person.jobtitle)
@@ -40,6 +54,8 @@ struct AvatarView: View {
 }
 
 #Preview {
+    AvatarView(isRound: false, person: Person.sample)
+        .padding()
     AvatarView(person: Person.sample)
         .padding()
 }
