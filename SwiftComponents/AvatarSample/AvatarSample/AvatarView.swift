@@ -8,6 +8,94 @@
 import SwiftUI
 
 
+struct AvatarStyleConfiguration {
+    let title: String
+    let subTitle: String
+    let detailsTitle: String
+    let imageName: String
+}
+
+protocol AvatarStyle {
+    associatedtype Body: View
+    
+    @ViewBuilder
+    func makeBody(configuration: Configuration) -> Body
+    
+    typealias Configuration = AvatarStyleConfiguration
+}
+
+struct AvatarStyleKey: EnvironmentKey {
+    static var defaultValue: any AvatarStyle = DefaultAvatarStyle()
+}
+
+extension EnvironmentValues {
+    var avatarStyle: any AvatarStyle {
+        get {
+            self[AvatarStyleKey.self]
+        }
+        set {
+            self[AvatarStyleKey.self] = newValue
+        }
+    }
+}
+
+extension View {
+    func avatarStyle(_ style: some AvatarStyle) -> some View {
+        environment(\.avatarStyle, style)
+    }
+}
+
+struct DefaultAvatarStyle: AvatarStyle {
+    @Environment(\.avatarImageShape) var imageShape
+    @Environment(\.editProfileHandler) var editProfileHandler
+    
+    private func titleLabel(_ text: String) -> some View {
+        Text(text)
+            .font(.headline)
+    }
+    private func detailLabel(_ text: String) -> some View {
+        Text(text)
+            .font(.subheadline)
+    }
+    
+    @ViewBuilder
+    private func profileImage(_ configuration:Configuration) -> some View {
+        if (imageShape == .round) {
+            Image(configuration.imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 75, height: 75, alignment: .center)
+                .clipShape(.circle)
+                .accessibilityLabel(configuration.title)
+        } else {
+            Image(configuration.imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 75, height: 75, alignment: .center)
+                .accessibilityLabel(configuration.title)
+        }
+    }
+    
+    func makeBody(configuration: Configuration) -> some View {
+        HStack(alignment: .top) {
+            profileImage(configuration)
+                .onTapGesture {
+                    if let editProfileHandler {
+                        editProfileHandler()
+                    }
+                }
+            VStack(alignment: .leading) {
+                titleLabel(configuration.title)
+                detailLabel(configuration.subTitle)
+                detailLabel(configuration.detailsTitle)
+            }
+            Spacer()
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(configuration.title)
+    }
+}
+
 struct AvatarEditProfileHandler: EnvironmentKey {
     static var defaultValue: (() -> Void)?
 }
@@ -48,63 +136,35 @@ extension View {
 }
 
 struct AvatarView: View {
-    @Environment(\.avatarImageShape) var imageShape
-    @Environment(\.editProfileHandler) var editProfileHandler
-    var person: Person
+    @Environment(\.avatarStyle) var style
     
-    @ViewBuilder
-    private var profileImage: some View {
-        if (imageShape == .round) {
-            Image(person.profileImageName)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 75, height: 75, alignment: .center)
-                .clipShape(.circle)
-                .accessibilityLabel(person.fullName)
-        } else {
-            Image(person.profileImageName)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 75, height: 75, alignment: .center)
-                .accessibilityLabel(person.fullName)
-        }
-    }
-    private var titleLabel: some View {
-        Text(person.fullName)
-            .font(.headline)
-    }
-    private func detailLabel(_ text: String) -> some View {
-        Text(text)
-            .font(.subheadline)
+    var title: String
+    var subTitle: String
+    var detailsTitle: String
+    var imageName: String
+    
+    init(title: String, subTitle: String, detailsTitle: String, imageName: String) {
+        self.title = title
+        self.subTitle = subTitle
+        self.detailsTitle = detailsTitle
+        self.imageName = imageName
     }
     
     var body: some View {
-        HStack(alignment: .top) {
-            profileImage
-                .onTapGesture {
-                    if let editProfileHandler {
-                        editProfileHandler()
-                    }
-                }
-            VStack(alignment: .leading) {
-                titleLabel
-                detailLabel(person.jobtitle)
-                detailLabel(person.affiliation)
-            }
-            Spacer()
-        }
-        .accessibilityElement(children: .contain)
-        .accessibilityLabel(person.fullName)
+        let configuration = AvatarStyleConfiguration(title: title, subTitle: subTitle, detailsTitle: detailsTitle, imageName: imageName)
+        
+        AnyView(style.makeBody(configuration: configuration))
     }
 }
 
 #Preview {
-    AvatarView(person: Person.sample)
+    var person = Person.sample
+    AvatarView(title: person.fullName, subTitle: person.jobtitle, detailsTitle: person.affiliation, imageName: person.profileImageName)
         .avatarImageShape(AvatarImageShape.rectangle)
         .onEditProfile {
             print("You've tapped on the profile image!")
         }
         .padding()
-    AvatarView(person: Person.sample)
+    AvatarView(title: person.fullName, subTitle: person.jobtitle, detailsTitle: person.affiliation, imageName: person.profileImageName)
         .padding()
 }

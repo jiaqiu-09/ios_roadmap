@@ -17,13 +17,13 @@ struct ContentView: View {
         
             Section("Participants") {
                 ForEach(participants) { participant in
-                    AvatarView(person: participant)
+                    AvatarView(title: participant.fullName, subTitle: participant.jobtitle, detailsTitle: participant.affiliation, imageName: participant.profileImageName)
                         .avatarImageShape(AvatarImageShape.round)
                 }
             }
             Section("Speakers") {
                 ForEach(people) { person in
-                    AvatarView(person: person)
+                    AvatarView(title: person.fullName, subTitle: person.jobtitle, detailsTitle: person.affiliation, imageName: person.profileImageName)
                 }
             }
         }
