@@ -13,6 +13,7 @@ struct AvatarStyleConfiguration {
     let subTitle: String
     let detailsTitle: String
     let imageName: String
+    let editProfileHandler: (() -> Void)?
 }
 
 protocol AvatarStyle {
@@ -47,7 +48,6 @@ extension View {
 
 struct DefaultAvatarStyle: AvatarStyle {
     @Environment(\.avatarImageShape) var imageShape
-    @Environment(\.editProfileHandler) var editProfileHandler
     
     private func titleLabel(_ text: String) -> some View {
         Text(text)
@@ -80,7 +80,7 @@ struct DefaultAvatarStyle: AvatarStyle {
         HStack(alignment: .top) {
             profileImage(configuration)
                 .onTapGesture {
-                    if let editProfileHandler {
+                    if let editProfileHandler = configuration.editProfileHandler {
                         editProfileHandler()
                     }
                 }
@@ -96,22 +96,22 @@ struct DefaultAvatarStyle: AvatarStyle {
     }
 }
 
-struct AvatarEditProfileHandler: EnvironmentKey {
-    static var defaultValue: (() -> Void)?
-}
-
-extension EnvironmentValues {
-    var editProfileHandler: (() -> Void)? {
-        get {self[AvatarEditProfileHandler.self] }
-        set {self[AvatarEditProfileHandler.self] = newValue}
-    }
-}
-
-extension View {
-    public func onEditProfile(editProfileHandler: @escaping () -> Void) -> some View {
-        environment(\.editProfileHandler, editProfileHandler)
-    }
-}
+//struct AvatarEditProfileHandler: EnvironmentKey {
+//    static var defaultValue: (() -> Void)?
+//}
+//
+//extension EnvironmentValues {
+//    var editProfileHandler: (() -> Void)? {
+//        get {self[AvatarEditProfileHandler.self] }
+//        set {self[AvatarEditProfileHandler.self] = newValue}
+//    }
+//}
+//
+//extension View {
+//    public func onEditProfile(editProfileHandler: @escaping () -> Void) -> some View {
+//        environment(\.editProfileHandler, editProfileHandler)
+//    }
+//}
 
 enum AvatarImageShape {
     case round
@@ -142,16 +142,18 @@ struct AvatarView: View {
     var subTitle: String
     var detailsTitle: String
     var imageName: String
+    var editProfileHandler: (() -> Void)?
     
-    init(title: String, subTitle: String, detailsTitle: String, imageName: String) {
+    init(title: String, subTitle: String, detailsTitle: String, imageName: String, editProfileHandler: (() -> Void)? = nil) {
         self.title = title
         self.subTitle = subTitle
         self.detailsTitle = detailsTitle
         self.imageName = imageName
+        self.editProfileHandler = editProfileHandler
     }
     
     var body: some View {
-        let configuration = AvatarStyleConfiguration(title: title, subTitle: subTitle, detailsTitle: detailsTitle, imageName: imageName)
+        let configuration = AvatarStyleConfiguration(title: title, subTitle: subTitle, detailsTitle: detailsTitle, imageName: imageName, editProfileHandler: editProfileHandler)
         
         AnyView(style.makeBody(configuration: configuration))
     }
@@ -159,12 +161,12 @@ struct AvatarView: View {
 
 #Preview {
     var person = Person.sample
-    AvatarView(title: person.fullName, subTitle: person.jobtitle, detailsTitle: person.affiliation, imageName: person.profileImageName)
-        .avatarImageShape(AvatarImageShape.rectangle)
-        .onEditProfile {
-            print("You've tapped on the profile image!")
-        }
-        .padding()
+    AvatarView(title: person.fullName, subTitle: person.jobtitle, detailsTitle: person.affiliation, imageName: person.profileImageName, editProfileHandler: {
+        print("You've tapped on the profile image!")
+    })
+    .avatarImageShape(AvatarImageShape.rectangle)
+    
+    .padding()
     AvatarView(title: person.fullName, subTitle: person.jobtitle, detailsTitle: person.affiliation, imageName: person.profileImageName)
         .padding()
 }

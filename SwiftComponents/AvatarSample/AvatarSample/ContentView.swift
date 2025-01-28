@@ -17,7 +17,9 @@ struct ContentView: View {
         
             Section("Participants") {
                 ForEach(participants) { participant in
-                    AvatarView(title: participant.fullName, subTitle: participant.jobtitle, detailsTitle: participant.affiliation, imageName: participant.profileImageName)
+                    AvatarView(title: participant.fullName, subTitle: participant.jobtitle, detailsTitle: participant.affiliation, imageName: participant.profileImageName, editProfileHandler: {
+                        print("Participants clicked!")
+                    })
                         .avatarImageShape(AvatarImageShape.round)
                 }
             }
