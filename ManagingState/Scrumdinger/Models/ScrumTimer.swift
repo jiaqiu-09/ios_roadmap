@@ -111,6 +111,8 @@ final class ScrumTimer: ObservableObject {
             }
             secondsRemaining = max(lengthInSeconds - self.secondsElapsed, 0)
 
+            print("secondsElapsedForSpeaker: \(secondsElapsedForSpeaker)")
+            print("secondsPerSpeaker: \(secondsPerSpeaker)")
             if secondsElapsedForSpeaker >= secondsPerSpeaker {
                 changeToSpeaker(at: speakerIndex + 1)
                 speakerChangedAction?()
